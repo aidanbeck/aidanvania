@@ -1,9 +1,9 @@
-document.addEventListener('keydown', input);
+document.addEventListener('keydown', inputOn);
 document.addEventListener('keydown', inputOff);
 
 let binds = [];
 
-function input(event) {
+function inputOn(event) {
     let bind = binds[event.key];
     bind.function();
     bind.on = true;

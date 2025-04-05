@@ -4,7 +4,7 @@ defaultContext = setContext("20px Courier New", canvas);
 
 //Create objects array
 let objects = [
-    { s:" ", x: 200, y: 20, v: {x:-0.1,y:0}, color:"white", radius:10},
+    { x: 200, y: 20, v: {x:-0.1,y:0}, color:"white", radius:10},
     { s:"Q", x: 30, y: 30, v: {x:0,y:0}, color:"black", radius:10},
     { s:"W", x: 20, y: 40, v: {x:-2,y:-1}, color:"black", radius:10},
     { s:"E", x: 40, y: 50, v: {x:-1.5,y:1}, color:"black", radius:10},
@@ -12,16 +12,29 @@ let objects = [
     { s:"T", x: 50, y: 70, v: {x:-0.5,y:1}, color:"black", radius:10},
 ];
 
+let renderQueue = [0,1,2,3,4,5];
+
+function getRenderIndex(mainIndex) {
+    for (i = 0; i < renderQueue.length; i++) {
+        if (mainIndex == renderQueue[i]) { 
+            return i;
+        }
+    }
+}
+
 function updateFrame() {
     clear();
     setCollisionColors(objects);
-    frame(objects);
+    frame(objects,renderQueue);
 }
 
 //Movement
 function move(index, x, y) {
     objects[index].x += x;
     objects[index].y += y;
+
+    let renderIndex = getRenderIndex(index);
+
     updateFrame();
 }
 //Declare Binds
@@ -41,7 +54,7 @@ function tabThroughObjects() {
     if (controlIndex >= objects.length) { controlIndex = 0; }    
 }
 
-//
+//Color overlapping objects, and color controllable object.
 function setCollisionColors(objects) {
     let collisions = getCollisions(objects);
     for (i = 0; i < objects.length; i++) {

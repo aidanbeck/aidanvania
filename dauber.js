@@ -20,9 +20,9 @@ function clear() {
     defaultContext.clearRect(0, 0, defaultContext.canvas.width, defaultContext.canvas.height);
 }
 
-function frame(array) {
-    for (i = 0; i < array.length; i++) {
-        let object = array[i];
+function frame(array, indexes) {
+    for (i = 0; i < indexes.length; i++) {
+        let object = array[indexes[i]];
         defaultContext.fillStyle = object.color;
         // renderText(object.s, object.x, object.y);
         renderCircle(object.radius, object.x, object.y);
