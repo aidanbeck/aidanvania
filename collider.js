@@ -1,5 +1,5 @@
 //returns pairs of indexes corresponding to colliding objects
-function getCollisions (objects) {
+function getCollisions(objects) {
     let collisions = [];
     for (i = 0; i < objects.length; i++) {
         for (j = i+1; j < objects.length; j++) {
@@ -15,7 +15,7 @@ function getCollisions (objects) {
 function circleCollision(object1,object2) {
 
     let distance = getDistance(object1.x, object1.y, object2.x, object2.y);
-    if (distance < object1.radius || distance < object2.radius) { return true; }
+    if (distance < object1.radius + object2.radius) { return true; }
     return false;
 }
 

@@ -10,21 +10,22 @@ function renderText(string, x, y) {
     defaultContext.fillText(string, x, y);
 }
 
+function renderCircle(radius, x, y) {
+    defaultContext.beginPath();
+    defaultContext.arc(x, y, radius, 0, 2 * Math.PI);
+    defaultContext.fill();
+}
+
 function clear() {
     defaultContext.clearRect(0, 0, defaultContext.canvas.width, defaultContext.canvas.height);
 }
 
 function frame(array) {
-    let focus = objects[0];
-
-    // defaultContext.clearRect(0, 0, canvas.width, canvas.height);
-
     for (i = 0; i < array.length; i++) {
         let object = array[i];
-        // renderText(object.s, object.x - focus.x + 150, object.y);
-
         defaultContext.fillStyle = object.color;
-        renderText(object.s, object.x, object.y);
+        // renderText(object.s, object.x, object.y);
+        renderCircle(object.radius, object.x, object.y);
         defaultContext.fillStyle = "black";
     }
 }
