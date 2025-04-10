@@ -43,7 +43,7 @@ bind("ArrowDown",   function(){ move(controlIndex,0,1); });
 bind("ArrowLeft",   function(){ move(controlIndex,-1,0);});
 bind("ArrowRight",  function(){ move(controlIndex,1,0); });
 bind("PageUp",      function(){ objects[controlIndex].radius += 1; updateFrame();});
-bind("PageDown",      function(){ objects[controlIndex].radius -= 1; updateFrame();});
+bind("PageDown",      function(){ objects[controlIndex].radius -= 1; if (objects[controlIndex].radius < 1) {objects[controlIndex].radius = 1;} updateFrame();});
 bind("Tab",       function(){ tabThroughObjects(); updateFrame(); });
 
 //Control next object in array
