@@ -2,17 +2,17 @@
 function getCollisions(objects) {
     let collisions = [];
     for (i = 0; i < objects.length; i++) {
-        for (j = i+1; j < objects.length; j++) {
-            let isColliding = circleCollision(objects[i],objects[j]);
+        for (j = i + 1; j < objects.length; j++) {
+            let isColliding = circleCollision(objects[i], objects[j]);
             if (isColliding) {
-                collisions[collisions.length] = [i,j];
+                collisions[collisions.length] = [i, j];
             }
         }
     }
     return collisions;
 }
 
-function circleCollision(object1,object2) {
+function circleCollision(object1, object2) {
 
     let distance = getDistance(object1.x, object1.y, object2.x, object2.y);
     if (distance < object1.radius + object2.radius) { return true; }

@@ -13,7 +13,7 @@ class Lattice {
         }
     }
 
-    setCell(x,y,object) {
+    setCell(x, y, object) {
         this.cells[y][x] = object;
     }
 }

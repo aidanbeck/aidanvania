@@ -15,5 +15,5 @@ function inputOff(event) {
 }
 
 function bind(key, func) {
-    binds[key] = {function: func, on: false };
+    binds[key] = { function: func, on: false };
 }
