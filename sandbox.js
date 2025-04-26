@@ -4,7 +4,7 @@ DAUBER.defaultContext = DAUBER.setContext("20px Courier New", canvas);
 
 //Define image
 const playerImage = new Image();
-playerImage.src = 'dev.bmp'; // Replace with your image URL
+playerImage.src = 'zev.bmp'; // Replace with your image URL
 
 //Create objects array
 let objects = [
