@@ -1,3 +1,6 @@
+//A lattice is a group of tiled images, but each individual image doesn't have its own x,y,v.
+//Instead, they are mapped to a resolution together, and its position is derived from its index.
+//Should this be refactored so that it can be a lattice of circles, text, etc?
 class Lattice {
 
     constructor(width, height, cellWidth = null, cellHeight = null) {
