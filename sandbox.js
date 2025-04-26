@@ -2,14 +2,18 @@
 let canvas = document.getElementsByTagName("canvas")[0];
 defaultContext = setContext("20px Courier New", canvas);
 
+//Define image
+const playerImage = new Image();
+playerImage.src = 'dev.bmp'; // Replace with your image URL
+
 //Create objects array
 let objects = [
-    {         x:200, y: 20, v: { x: -0.1, y: 0 },   color: "white", radius: 10 },
-    { s: "Q", x: 30, y: 30, v: { x: 0, y: 0 },      color: "black", radius: 10 },
-    { s: "W", x: 20, y: 40, v: { x: -2, y: -1 },    color: "black", radius: 10 },
-    { s: "E", x: 40, y: 50, v: { x: -1.5, y: 1 },   color: "black", radius: 10 },
-    { s: "R", x: 20, y: 60, v: { x: 0.5, y: -0.5 }, color: "black", radius: 10 },
-    { s: "T", x: 50, y: 70, v: { x: -0.5, y: 1 },   color: "black", radius: 10 },
+    {         x:200, y: 20, v: { x: -0.1, y: 0 },   color: "white", radius: 10, image: playerImage },
+    { s: "Q", x: 30, y: 30, v: { x: 0, y: 0 },      color: "black", radius: 10, image: playerImage },
+    { s: "W", x: 20, y: 40, v: { x: -2, y: -1 },    color: "black", radius: 10, image: playerImage },
+    { s: "E", x: 40, y: 50, v: { x: -1.5, y: 1 },   color: "black", radius: 10, image: playerImage },
+    { s: "R", x: 20, y: 60, v: { x: 0.5, y: -0.5 }, color: "black", radius: 10, image: playerImage },
+    { s: "T", x: 50, y: 70, v: { x: -0.5, y: 1 },   color: "black", radius: 10, image: playerImage },
 ];
 
 let renderQueue = [0, 1, 2, 3, 4, 5];

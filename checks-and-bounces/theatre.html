@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <style>
+            canvas { width: 90%; background-color: lightgreen; }
+        </style>
+        <script src="dauber.js"></script>
+        <script src="input.js"></script>
+        <script src="collider.js"></script>
+        <script src="checks-and-bounces.js"></script>
+    </head>
+    <body>
+        <canvas></canvas>
+    </body>
+    <script>
+        let canvas = document.getElementsByTagName("canvas")[0];
+        defaultContext = setContext("20px Courier New", canvas);
+
+        let objects = [
+            { s:"♔", x: 200, y: 20, v: {x:-0.1,y:0}, color:"black", radius:10},
+            { s:"♟", x: 30, y: 30, v: {x:0,y:0}, color:"black", radius:10},
+            { s:"♘", x: 20, y: 40, v: {x:-2,y:-1}, color:"black", radius:10},
+            { s:"♕", x: 40, y: 50, v: {x:-1.5,y:1}, color:"black", radius:10},
+            { s:"♗", x: 20, y: 60, v: {x:0.5,y:-0.5}, color:"black", radius:10},
+            { s:"♖", x: 50, y: 70, v: {x:-0.5,y:1}, color:"black", radius:10},
+        ];
+
+        bind("ArrowUp", function(){ objects[1].v.y -= 0.1} );
+        bind("ArrowDown", function(){ objects[1].v.y += 0.1} );
+        bind("ArrowLeft", function(){ objects[1].v.x -= 0.3} );
+        bind("ArrowRight", function(){ objects[1].v.x += 0.3} );
+        
+        alert("Use the arrow keys to move the pawn!");
+
+        setInterval(function() {
+            
+            defaultContext.clearRect(0, 0, canvas.width, canvas.height);
+            drawLevelBar(mode);
+            tick(objects);
+            frame(objects);
+            processAirTime();
+
+        }, 20);
+
+    
+        let mode = 0;
+        let airTime = 0;
+        let bestAirTime = 0;
+        function tick(array) {
+            bounce(array);
+            for (i = 0; i < array.length; i++) {
+                let object = array[i];
+
+                if (object.x < 0) { object.v.x *= -1; object.x = 0; }
+                if (object.x > 290) { object.v.x *= -1; object.x = 290; }
+
+                if (object.y > 150) {
+                    if (object.y > 200) { object.y /= 2; object.y = 150 }
+                    object.v.y = -Math.abs(object.v.y);
+                    if (i == 1 && mode == 2) {
+                        if (objects[0].color == "black") {
+                            for (j = 0; j < objects.length; j++) {objects[j].color = "red"; }
+                        } else {
+                            for (j = 0; j < objects.length; j++) {objects[j].color = "black"; }
+                        }
+                       
+                        airTime = 0;
+                    }
+                    if (i == 0 && mode == 3) {
+                        if (airTime > bestAirTime) {
+                            bestAirTime = airTime;
+                        }
+                        airTime = 0;
+                    }
+                } else {
+                    object.v.y += 0.1;
+                }               
+ 
+                object.x += object.v.x;
+                object.y += object.v.y;
+            }
+        }
+ 
+        function bounce(objects) {
+            let collisions = getCollisions(objects);
+            for (i = 0; i < collisions.length; i++) {
+            
+                let object1 = objects[collisions[i][0]];
+                let object2 = objects[collisions[i][1]];
+                
+                //swap velocities (bounce!)
+                let v = {x:object1.v.x, y:object1.v.y};
+                object1.v = object2.v;
+                object2.v = v;
+                
+                if (mode == 1) { swapColors(object1,object2); }
+            }
+        }
+        
+        function swapColors(object1, object2) {
+            if (object1.color == "red" && object2.color == "black") {
+                object2.color = "red";
+            }
+            else if (object1.color == "black" && object2.color == "red") {
+                object1.color = "red";
+            }
+            else if (object1.color == "red" && object2.color == "red") {
+                object2.color = "black";
+                object1.color = "black";
+            }
+        }
+
+    </script>
+</html>

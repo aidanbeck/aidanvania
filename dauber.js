@@ -16,6 +16,10 @@ function renderCircle(radius, x, y) {
     defaultContext.fill();
 }
 
+function renderImage(image, x, y) {
+    defaultContext.drawImage(image, x, y);
+}
+
 function clear() {
     defaultContext.clearRect(0, 0, defaultContext.canvas.width, defaultContext.canvas.height);
 }
@@ -25,7 +29,8 @@ function frame(array, indexes) {
         let object = array[indexes[i]];
         defaultContext.fillStyle = object.color;
         // renderText(object.s, object.x, object.y);
-        renderCircle(object.radius, object.x, object.y);
+        // renderCircle(object.radius, object.x, object.y);
+        renderImage(object.image, object.x, object.y);
         defaultContext.fillStyle = "black";
     }
 }
