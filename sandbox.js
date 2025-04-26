@@ -1,6 +1,6 @@
 //Set up render context
 let canvas = document.getElementsByTagName("canvas")[0];
-defaultContext = setContext("20px Courier New", canvas);
+DAUBER.defaultContext = DAUBER.setContext("20px Courier New", canvas);
 
 //Define image
 const playerImage = new Image();
@@ -27,9 +27,9 @@ function getRenderIndex(mainIndex) {
 }
 
 function updateFrame() {
-    clear();
+    DAUBER.clear();
     setCollisionColors(objects);
-    frame(objects, renderQueue);
+    DAUBER.frame(objects, renderQueue);
 }
 
 //Movement

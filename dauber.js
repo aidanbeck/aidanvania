@@ -1,36 +1,40 @@
-let defaultContext; //Should be accessible by all of Dauber
+let DAUBER = {
+    
+    defaultContext: null, //Should be accessible by all of Dauber
 
-function setContext(font, canvas) {
-    let context = canvas.getContext("2d");
-    context.font = font;
-    return context;
-}
+    setContext(font, canvas) {
+        let context = canvas.getContext("2d");
+        context.font = font;
+        return context;
+    },
 
-function renderText(string, x, y) {
-    defaultContext.fillText(string, x, y);
-}
+    text(string, x, y) {
+        this.defaultContext.fillText(string, x, y);
+    },
 
-function renderCircle(radius, x, y) {
-    defaultContext.beginPath();
-    defaultContext.arc(x, y, radius, 0, 2 * Math.PI);
-    defaultContext.fill();
-}
+    circle(radius, x, y) {
+        this.defaultContext.beginPath();
+        this.defaultContext.arc(x, y, radius, 0, 2 * Math.PI);
+        this.defaultContext.fill();
+    },
 
-function renderImage(image, x, y) {
-    defaultContext.drawImage(image, x, y);
-}
+    image(image, x, y) {
+        this.defaultContext.drawImage(image, x, y);
+    },
 
-function clear() {
-    defaultContext.clearRect(0, 0, defaultContext.canvas.width, defaultContext.canvas.height);
-}
+    clear() {
+        let context = this.defaultContext;
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    },
 
-function frame(array, indexes) {
-    for (i = 0; i < indexes.length; i++) {
-        let object = array[indexes[i]];
-        defaultContext.fillStyle = object.color;
-        // renderText(object.s, object.x, object.y);
-        // renderCircle(object.radius, object.x, object.y);
-        renderImage(object.image, object.x, object.y);
-        defaultContext.fillStyle = "black";
+    frame(array, indexes) {
+        for (i = 0; i < indexes.length; i++) {
+            let object = array[indexes[i]];
+            this.defaultContext.fillStyle = object.color;
+            // this.text(object.s, object.x, object.y);
+            // this.circle(object.radius, object.x, object.y);
+            this.image(object.image, object.x, object.y);
+            this.defaultContext.fillStyle = "black";
+        }
     }
 }
