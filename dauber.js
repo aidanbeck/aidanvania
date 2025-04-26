@@ -1,6 +1,7 @@
+//Should dauber be a class instead? especially with the Context, frame, clear, and stuff?
 let DAUBER = {
     
-    defaultContext: null, //Should be accessible by all of Dauber
+    defaultContext: null,
 
     setContext(font, canvas) {
         let context = canvas.getContext("2d");
@@ -8,11 +9,8 @@ let DAUBER = {
         return context;
     },
 
-    text(string, x, y) {
-        this.defaultContext.fillText(string, x, y);
-    },
-
-    circle(radius, x, y) {
+    circle(radius, color, x, y) {
+        this.defaultContext.fillStyle = color;
         this.defaultContext.beginPath();
         this.defaultContext.arc(x, y, radius, 0, 2 * Math.PI);
         this.defaultContext.fill();
@@ -20,6 +18,11 @@ let DAUBER = {
 
     image(image, x, y) {
         this.defaultContext.drawImage(image, x, y);
+    },
+
+    text(string, color, x, y) {
+        this.defaultContext.fillStyle = color;
+        this.defaultContext.fillText(string, x, y);
     },
 
     clear() {
@@ -30,11 +33,7 @@ let DAUBER = {
     frame(array, indexes) {
         for (i = 0; i < indexes.length; i++) {
             let object = array[indexes[i]];
-            this.defaultContext.fillStyle = object.color;
-            // this.text(object.s, object.x, object.y);
-            // this.circle(object.radius, object.x, object.y);
-            this.image(object.image, object.x, object.y);
-            this.defaultContext.fillStyle = "black";
+            object.render();
         }
     }
 }

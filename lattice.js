@@ -16,13 +16,21 @@ class Lattice {
     setCell(x, y, object) {
         this.cells[y][x] = object;
     }
+
+    render() {
+        renderLattice(this);
+    }
 }
 
 function renderLattice(lattice) {
     for (i = 0; i < lattice.height; i++) {
         for (j = 0; j < lattice.width; j++) {
             if (lattice.cells[i][j]) {
-                //render lattice.cells[i][j] at (lattice.scale.width*j,lattice.scale.height*i)
+                DAUBER.image(
+                    lattice.cells[i][j].image,
+                    lattice.scale.width * j,
+                    lattice.scale.height * i
+                )
             }
         }
     }
