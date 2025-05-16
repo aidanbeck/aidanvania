@@ -25,10 +25,3 @@ function getDistance(x1, y1, x2, y2) {
     const deltaY = y2 - y1;
     return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 }
-
-//gravity
-//object.v.y += 0.1;
-
-//apply velocity
-//object.x += object.v.x;
-//object.y += object.v.y;

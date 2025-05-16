@@ -27,29 +27,35 @@ function getRenderIndex(mainIndex) {
     }
 }
 
-function updateFrame() {
+setInterval(function() {
+            
     daub.clear();
     setCollisionColors(objects);
+
+    for (object of objects) {
+        velocity(object);
+        friction(object);
+    }
+
     daub.frame(objects, renderQueue);
-}
+
+}, 20);
 
 //Movement
 function move(index, x, y) {
-    objects[index].x += x;
-    objects[index].y += y;
+    objects[index].v.x += x*2;
+    objects[index].v.y += y*2;
 
     let renderIndex = getRenderIndex(index);
-
-    updateFrame();
 }
 //Declare Binds
 bind("ArrowUp",    function () { move(controlIndex,  0, -1 ); });
 bind("ArrowDown",  function () { move(controlIndex,  0,  1 ); });
 bind("ArrowLeft",  function () { move(controlIndex, -1,  0 ); });
 bind("ArrowRight", function () { move(controlIndex,  1,  0 ); });
-bind("PageUp",     function () { objects[controlIndex].radius += 1; updateFrame(); });
-bind("PageDown",   function () { objects[controlIndex].radius -= 1; if (objects[controlIndex].radius < 1) { objects[controlIndex].radius = 1; } updateFrame(); });
-bind("Tab",        function () { tabThroughObjects(); updateFrame(); });
+bind("PageUp",     function () { objects[controlIndex].radius += 1; });
+bind("PageDown",   function () { objects[controlIndex].radius -= 1; if (objects[controlIndex].radius < 1) { objects[controlIndex].radius = 1; } });
+bind("Tab",        function () { tabThroughObjects(); });
 
 //Control next object in array
 let controlIndex = 0;
@@ -75,6 +81,3 @@ function setCollisionColors(objects) {
         objects[controlIndex].color = "white";
     }
 }
-
-//Render First Frame
-updateFrame();

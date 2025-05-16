@@ -7,11 +7,10 @@ class Entity {
     }
 }
 
-class Sprite {
-    constructor(image, x, y) {
+class Sprite extends Entity {
+    constructor(image, x, y, v) {
+        super(x, y, v);
         this.image = image;
-        this.x = x;
-        this.y = y;
     }
 
     render(dauber) {
@@ -19,12 +18,11 @@ class Sprite {
     }
 }
 
-class Circle {
-    constructor(radius, color, x, y) {
+class Circle extends Entity {
+    constructor(radius, color, x, y, v) {
+        super(x, y, v);
         this.radius = radius;
         this.color = color;
-        this.x = x;
-        this.y = y;
     }
 
     render(dauber) {
@@ -32,12 +30,11 @@ class Circle {
     }
 }
 
-class Runes {
-    constructor(string, color, x, y) {
+class Runes extends Entity {
+    constructor(string, color, x, y, v) {
+        super(x, y, v);
         this.string = string;
         this.color = color;
-        this.x = x;
-        this.y = y;
     }
 
     render(dauber) {
@@ -45,14 +42,12 @@ class Runes {
     }
 }
 
-class Lattice {
+class Lattice extends Entity {
 
-    constructor(width, height, x, y, cellWidth = 32, cellHeight = 32) {
-
+    constructor(width, height, x, y, cellWidth = 32, cellHeight = 32, v) {
+        super(x, y, v);
         this.width = width;
         this.height = height;
-        this.x = x;
-        this.y = y;
         this.scale = { width: cellWidth, height: cellHeight };
         this.cells = new Array(height);
 
