@@ -1,6 +1,6 @@
 //Set up render context
 let canvas = document.getElementsByTagName("canvas")[0];
-DAUBER.defaultContext = DAUBER.setContext("20px Courier New", canvas);
+let daub = new Dauber(canvas);
 
 //Define image
 const playerImage = new Image();
@@ -9,10 +9,15 @@ playerImage.src = 'zev.bmp';
 let objects = [
     new Sprite(playerImage, 20, 20),
     new Circle(10, "white", 30, 30),
-    new Runes("&", "green", 50, 50)
+    new Runes("T", "green", 50, 50),
+    new Lattice(3,3,0,0)
 ]
 
-let renderQueue = [0, 1, 2];
+objects[3].setCell(0,0, {image: playerImage});
+objects[3].setCell(1,1, {image: playerImage});
+objects[3].setCell(2,2, {image: playerImage});
+
+let renderQueue = [0, 1, 2, 3];
 
 function getRenderIndex(mainIndex) {
     for (i = 0; i < renderQueue.length; i++) {
@@ -23,9 +28,9 @@ function getRenderIndex(mainIndex) {
 }
 
 function updateFrame() {
-    DAUBER.clear();
+    daub.clear();
     setCollisionColors(objects);
-    DAUBER.frame(objects, renderQueue);
+    daub.frame(objects, renderQueue);
 }
 
 //Movement
