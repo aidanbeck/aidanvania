@@ -5,15 +5,23 @@ let binds = [];
 
 function inputOn(event) {
     let bind = binds[event.key];
-    bind.function();
+    bind.downFunction();
     bind.on = true;
 }
 
 function inputOff(event) {
     let bind = binds[event.key];
+    // bind.upFunction();
     bind.on = false;
 }
 
-function bind(key, func) {
-    binds[key] = { function: func, on: false };
+class Bind {
+    constructor (key, downFunction, upFunction = null) {
+        this.key = key;
+        this.downFunction = downFunction;
+        this.upFunction = upFunction;
+        this.pressing = false;
+
+        binds[key] = this;
+    }
 }

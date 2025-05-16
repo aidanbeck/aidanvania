@@ -48,14 +48,7 @@ function move(index, x, y) {
 
     let renderIndex = getRenderIndex(index);
 }
-//Declare Binds
-bind("ArrowUp",    function () { move(controlIndex,  0, -1 ); });
-bind("ArrowDown",  function () { move(controlIndex,  0,  1 ); });
-bind("ArrowLeft",  function () { move(controlIndex, -1,  0 ); });
-bind("ArrowRight", function () { move(controlIndex,  1,  0 ); });
-bind("PageUp",     function () { objects[controlIndex].radius += 1; });
-bind("PageDown",   function () { objects[controlIndex].radius -= 1; if (objects[controlIndex].radius < 1) { objects[controlIndex].radius = 1; } });
-bind("Tab",        function () { tabThroughObjects(); });
+
 
 //Control next object in array
 let controlIndex = 0;
@@ -64,6 +57,15 @@ function tabThroughObjects() {
     controlIndex++;
     if (controlIndex >= objects.length) { controlIndex = 0; }
 }
+
+//Declare Binds
+new Bind("ArrowUp",   () => move(controlIndex,  0, -1 ) );
+new Bind("ArrowDown", () => move(controlIndex,  0,  1 ) );
+new Bind("ArrowLeft", () => move(controlIndex, -1,  0 ) );
+new Bind("ArrowRight",() => move(controlIndex,  1,  0 ) );
+new Bind("PageUp",    () => objects[controlIndex].radius += 1 );
+new Bind("PageDown",  () =>{objects[controlIndex].radius -= 1; if (objects[controlIndex].radius < 1) { objects[controlIndex].radius = 1; }} );
+new Bind("Tab",             tabThroughObjects );
 
 //Color overlapping objects, and color controllable object.
 function setCollisionColors(objects) {
