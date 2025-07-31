@@ -7,7 +7,6 @@ import Bind from './modules/input.js';
 import './style.css';
 
 document.querySelector('#app').innerHTML = `
-  <h1>Hello World</h1>
   <canvas></canvas>
   
 `;
