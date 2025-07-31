@@ -1,10 +1,24 @@
+import Dauber from './modules/dauber.js';
+import { Entity, Sprite, Circle, Runes, Lattice } from './modules/entities.js';
+import { velocity, friction } from './modules/momentum.js';
+import getCollisions from './modules/collider.js';
+import Bind from './modules/input.js';
+
+import './style.css';
+
+document.querySelector('#app').innerHTML = `
+  <h1>Hello World</h1>
+  <canvas></canvas>
+  
+`;
+
 //Set up render context
 let canvas = document.getElementsByTagName("canvas")[0];
 let daub = new Dauber(canvas);
 
 //Define image
 const playerImage = new Image();
-playerImage.src = 'zev.bmp';
+playerImage.src = "src/assets/dev.bmp";
 
 let objects = [
     new Sprite(playerImage, 20, 20),
@@ -20,7 +34,7 @@ objects[3].setCell(2,2, {image: playerImage});
 let renderQueue = [0, 1, 2, 3];
 
 function getRenderIndex(mainIndex) {
-    for (i = 0; i < renderQueue.length; i++) {
+    for (let i = 0; i < renderQueue.length; i++) {
         if (mainIndex == renderQueue[i]) {
             return i;
         }
@@ -32,7 +46,7 @@ setInterval(function() {
     daub.clear();
     setCollisionColors(objects);
 
-    for (object of objects) {
+    for (let object of objects) {
         velocity(object);
         friction(object);
     }
@@ -70,10 +84,10 @@ new Bind("Tab",             tabThroughObjects );
 //Color overlapping objects, and color controllable object.
 function setCollisionColors(objects) {
     let collisions = getCollisions(objects);
-    for (i = 0; i < objects.length; i++) {
+    for (let i = 0; i < objects.length; i++) {
         objects[i].color = "black"
     }
-    for (i = 0; i < collisions.length; i++) {
+    for (let i = 0; i < collisions.length; i++) {
         objects[collisions[i][0]].color = "steelblue";
         objects[collisions[i][1]].color = "steelblue";
     }

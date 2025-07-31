@@ -26,10 +26,12 @@ class Dauber {
     }
 
     frame(array, indexes) {
-        for (i = 0; i < indexes.length; i++) {
+        for (let i = 0; i < indexes.length; i++) {
             let object = array[indexes[i]];
             object.render(this);
         }
     }
 
 }
+
+export default Dauber;

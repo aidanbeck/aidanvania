@@ -28,3 +28,5 @@ function friction(object, f = 0.05) {
 function thrust(object, t = 0.1) {
     friction(object, -t); //this and friction should probably be combined
 }
+
+export { velocity, gravity, friction, thrust };

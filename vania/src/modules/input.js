@@ -25,3 +25,5 @@ class Bind {
         binds[key] = this;
     }
 }
+
+export default Bind;

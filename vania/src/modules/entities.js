@@ -62,8 +62,8 @@ class Lattice extends Entity {
     }
 
     render(dauber) {
-        for (i = 0; i < this.height; i++) {
-            for (j = 0; j < this.width; j++) {
+        for (let i = 0; i < this.height; i++) {
+            for (let j = 0; j < this.width; j++) {
                 if (this.cells[i][j]) {
                     dauber.image(
                         this.cells[i][j].image,
@@ -75,3 +75,5 @@ class Lattice extends Entity {
         }
     }
 }
+
+export { Entity, Sprite, Circle, Runes, Lattice }

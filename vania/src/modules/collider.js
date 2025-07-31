@@ -1,8 +1,8 @@
 //returns pairs of indexes corresponding to colliding objects
 function getCollisions(objects) {
     let collisions = [];
-    for (i = 0; i < objects.length; i++) {
-        for (j = i + 1; j < objects.length; j++) {
+    for (let i = 0; i < objects.length; i++) {
+        for (let j = i + 1; j < objects.length; j++) {
             let isColliding = circleCollision(objects[i], objects[j]);
             if (isColliding) {
                 collisions[collisions.length] = [i, j];
@@ -25,3 +25,5 @@ function getDistance(x1, y1, x2, y2) {
     const deltaY = y2 - y1;
     return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 }
+
+export default getCollisions;
